@@ -1,6 +1,5 @@
 import { Application, Point } from "pixi.js";
-import { BuildingGraphics } from "./buildings";
-import { generateRandomColor } from "./debug";
+import { ExtendedGraphics } from "./extendedGraphics";
 
 function main(element: HTMLElement) {
 	const app = new Application({
@@ -12,33 +11,14 @@ function main(element: HTMLElement) {
 	const width = 500;
 	const height = 500;
 
-	const building = new BuildingGraphics();
-	building.beginFill("black");
-	building.drawRect(0, 0, width, height);
-	building.endFill();
-	building.lineStyle({ color: "skyblue", width: 10 })
+	const extended = new ExtendedGraphics();
+	
+	extended.beginFill("black");
+	extended.drawRect(0, 0, width, height);
+	extended.endFill();
+	extended.lineStyle({ color: "skyblue", width: 10 })
+	extended.moveTo(0, 0);
 
-	// solid borders
-	// building.moveTo(0, 0)
-	// building.lineTo(width, 0);
-
-	// building.moveTo(width, 0)
-	// building.lineTo(width, height);
-
-	// building.moveTo(width, height)
-	// building.lineTo(0, height);
-
-	// building.moveTo(0, height);
-	// building.lineTo(0, 0);
-	// dotted borders
-
-	// building.lineTo(0, 40);
-	// building.moveTo(0, 50);
-	// building.lineTo(0, 90);
-	// building.moveTo(0, 100);
-	// building.lineTo(0, 140);
-
-	building.moveTo(0, 0);
 	const points = [
 		new Point(width, 0),
 		new Point(width, height),
@@ -46,22 +26,22 @@ function main(element: HTMLElement) {
 		new Point(0, 0),
 	];
 
-	building.dashedLineToPoint(points[0], 20, 5);
-	building.dashedLineToPoint(points[1], 20, 5);
-	building.dashedLineToPoint(points[2], 20, 5);
-	building.dashedLineToPoint(points[3], 20, 5);
+	extended.dashedLineToPoint(points[0], 20, 5);
+	extended.dashedLineToPoint(points[1], 20, 5);
+	extended.dashedLineToPoint(points[2], 20, 5);
+	extended.dashedLineToPoint(points[3], 20, 5);
 
-	building.position.set(
+	extended.position.set(
 		app.view.width / 2,
 		app.view.height / 2
 	);
 
-	building.pivot.set(
+	extended.pivot.set(
 		width / 2,
 		height / 2
 	)
 
-	app.stage.addChild(building);
+	app.stage.addChild(extended);
 
 	element.appendChild(app.view as unknown as HTMLElement);
 }

@@ -20,7 +20,7 @@ export function findTargetFactor(m: number, wx: number, wy: number, gx: number, 
 
 }
 
-export class BuildingGraphics extends Graphics {
+export class ExtendedGraphics extends Graphics {
 	readonly drawPosition: Point = new Point(0, 0);
 	constructor(geometry?: GraphicsGeometry) {
 		super(geometry);
