@@ -37,13 +37,19 @@ function main(element: HTMLElement) {
 	// building.lineTo(0, 90);
 	// building.moveTo(0, 100);
 	// building.lineTo(0, 140);
-	
-	building.moveTo(0, 0);
-	building.dashedLineTo(width, 0, 20, 5);
-	building.dashedLineTo(width, height, 20, 5);
-	building.dashedLineTo(0, height, 20, 5);
-	building.dashedLineTo(0, 0, 20, 5);
 
+	building.moveTo(0, 0);
+	const points = [
+		new Point(width, 0),
+		new Point(width, height),
+		new Point(0, height),
+		new Point(0, 0),
+	];
+
+	building.dashedLineToPoint(points[0], 20, 5);
+	building.dashedLineToPoint(points[1], 20, 5);
+	building.dashedLineToPoint(points[2], 20, 5);
+	building.dashedLineToPoint(points[3], 20, 5);
 
 	building.position.set(
 		app.view.width / 2,

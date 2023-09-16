@@ -64,4 +64,17 @@ export class BuildingGraphics extends Graphics {
 		this.moveTo(x, y);
 		return this;
 	}
+
+	// convenience functions
+	moveToPoint(point: Point) {
+		this.moveTo(point.x, point.y)
+	}
+
+	lineToPoint(point: Point) {
+		this.lineTo(point.x, point.y)
+	}
+
+	dashedLineToPoint(point: Point, segmentLength: number, segmentGap: number) {
+		this.dashedLineTo(point.x, point.y, segmentLength, segmentGap)
+	}
 }
