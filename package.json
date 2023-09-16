@@ -1,16 +1,15 @@
 {
 	"name": "@falchion-studios/pixi-extended-graphics",
 	"private": false,
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"type": "module",
 	"main": "dist/extendedGraphics.js",
 	"types": "dist/extendedGraphics.d.ts",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
+		"build": "tsc && vite build && npm run document",
 		"document": "typedoc lib/extendedGraphics.ts",
-		"preview": "vite preview",
-		"publish": "npm run document && npm publish && git push"
+		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@types/node": "^20.6.2",
