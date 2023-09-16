@@ -37,35 +37,30 @@ export class BuildingGraphics extends Graphics {
 	}
 
 	dashedLineTo(x: number, y: number, segmentLength: number, segmentGap: number): this {
-		console.warn("dashed line");
-		// TODO: moving point along vector
 		const origin = this.drawPosition.clone();
 		const destination = new Point(x, y);
 		const delta = destination.subtract(origin);
 
-		console.log(origin, destination);
+		// the factor the delta will be multipled by to produce the start and end of each segment
 		const segmentScalar = segmentLength / delta.magnitude();
+		// same as above, including space for the gap
 		const totalScalar = (segmentLength + segmentGap) / delta.magnitude();
 		const pieceCount = Math.floor(delta.magnitude() / (segmentLength + segmentGap));
-		console.assert(origin.equals(this.drawPosition));
 
 		for (let i = 0; i < pieceCount; i++) {
-			// const color = generateRandomColor();
-			// this.lineStyle({ color, width: 10 });
-			const start = i == 0 ? origin : delta.multiplyScalar(Math.min(i * totalScalar)).add(origin);
-
-			if (i == 0) {
-				console.assert(start.equals(origin));
-			}
-
+			const start = i == 0 ? origin : delta
+				.multiplyScalar(Math.min(i * totalScalar))
+				// ensures segments are drawn relative to the specified origin rather than (0, 0)
+				.add(origin);
 			this.moveTo(start.x, start.y);
 			const end = delta.multiplyScalar(segmentScalar + (i * totalScalar)).add(origin);
 			this.lineTo(end.x, end.y);
-			console.log("destination, unscaled: ", `(${destination.x.toFixed(2)}, ${destination.y.toFixed(2)})`);
-			console.log("destination, scaled: ", `(${end.x.toFixed(2)}, ${end.y.toFixed(2)})`);
-			console.log(`segment ${i}: (${start.x.toFixed(2)}, ${start.y.toFixed(2)}) -> (${end.x.toFixed(2)}, ${end.y.toFixed(2)})`);
 		}
 
+		// the dashed line may have a gap at the end. 
+		// this line ensures the drawing location is set
+		// to the actual destination rather than whatever 
+		// location the final segment happened to cut off at.
 		this.moveTo(x, y);
 		return this;
 	}

@@ -37,37 +37,7 @@ function main(element: HTMLElement) {
 	// building.lineTo(0, 90);
 	// building.moveTo(0, 100);
 	// building.lineTo(0, 140);
-	const bigLine = new Point(500, 0);
-	const drawPieces = (segmentLength: number, segmentGap: number) => {
-		const pieces: Point[] = [];
-		const segmentScalar = segmentLength / bigLine.magnitude();
-		const totalScalar = (segmentLength + segmentGap) / bigLine.magnitude();
-		const pieceCount = Math.floor(bigLine.magnitude() / (segmentLength + segmentGap));
-		for (let i = 0; i < pieceCount; i++) {
-			const color = generateRandomColor();
-			building.lineStyle({ color, width: 10 });
-			const start = i == 0 ? new Point(0, 0) : bigLine.multiplyScalar(i * totalScalar);
-			building.moveTo(start.x, start.y);
-			const end = bigLine.multiplyScalar(segmentScalar + (i * totalScalar))
-			building.lineTo(end.x, end.y);
-			console.log(start, end, color);
-		}
-
-	}
-
-	// drawPieces(30, 5);
-
-	// const pieces = [
-	// 	bigLine.multiplyScalar(0.1),
-	// 	bigLine.multiplyScalar(0.2),
-	// 	bigLine.multiplyScalar(0.3),
-	// 	bigLine.multiplyScalar(0.4),
-	// 	bigLine.multiplyScalar(0.5),
-	// 	bigLine.multiplyScalar(0.6),
-	// 	bigLine.multiplyScalar(0.7),
-	// 	bigLine.multiplyScalar(0.8),
-	// 	bigLine.multiplyScalar(0.9),
-	// ];
+	
 	building.moveTo(0, 0);
 	building.dashedLineTo(width, 0, 20, 5);
 	building.dashedLineTo(width, height, 20, 5);
