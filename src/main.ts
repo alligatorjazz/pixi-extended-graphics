@@ -1,5 +1,5 @@
 import { Application, Point } from "pixi.js";
-import { ExtendedGraphics } from "./extendedGraphics";
+import { ExtendedGraphics } from "../lib/extendedGraphics";
 
 function main(element: HTMLElement) {
 	const app = new Application({
