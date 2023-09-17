@@ -9,8 +9,7 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"document": "typedoc lib/extendedGraphics.ts",
-		"preview": "vite preview",
-		"publish": "npm run build && npm run document && npm publish"
+		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@types/node": "^20.6.2",
