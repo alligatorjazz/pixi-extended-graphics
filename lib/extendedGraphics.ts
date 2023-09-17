@@ -36,19 +36,10 @@ export class ExtendedGraphics extends Graphics {
 	 * @public @readonly
 	*/
 	readonly drawPosition: Point = new Point(0, 0);
-	/**
-	 * Controls whether lines drawn with dashedLineTo are treated as solid with respect to fills **Only applies to dashed lines drawn while `dashedFill` is set to `true`.
-	 *
-	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines.
-	 *
-	*/
+
 	private _dashedFill: boolean = false;
 	private solidQueue: Point[] = [];
 	private dashQueue: (() => void)[] = [];
-	private segmentStyle: { segmentLength: number; segmentGap: number; } = {
-		segmentLength: 10,
-		segmentGap: 2
-	};
 	/**
 	 * Creates a new `ExtendedGraphics()` instance.
 	 *
@@ -66,25 +57,12 @@ export class ExtendedGraphics extends Graphics {
 		if (this.dashedFill) {
 			const originalStyle = { ...this.line };
 			this.lineStyle({ ...originalStyle, alpha: 0 });
-			const queue = this.solidQueue.slice(-1)[0].equals(this.solidQueue[0]) ?
-				this.solidQueue :
-				this.solidQueue.concat(this.solidQueue[0]);
-			console.log(queue);
 
-			this.drawPolygon(queue);
+			this.drawPolygon(this.solidQueue);
 			this.lineStyle(originalStyle);
 
 			for (const drawLine of this.dashQueue) {
 				drawLine();
-				// compensates for the fact that the final point of the polygon was
-				// added *after* the dashed lines were drawn
-
-				this.drawDashesBetween(
-					this.solidQueue[this.solidQueue.length - 1],
-					this.solidQueue[0],
-					this.segmentStyle.segmentLength,
-					this.segmentStyle.segmentGap
-				);
 			}
 		}
 		super.endFill();
@@ -148,8 +126,6 @@ export class ExtendedGraphics extends Graphics {
 		const destination = new Point(x, y);
 
 		if (this.dashedFill) {
-			// saves the segment settings to segment style
-			this.segmentStyle = { segmentLength, segmentGap };
 			this.solidQueue.push(origin);
 			this.solidQueue.push(destination);
 			this.dashQueue.push(() => this.drawDashesBetween(origin, destination, segmentLength, segmentGap));
@@ -192,6 +168,12 @@ export class ExtendedGraphics extends Graphics {
 		return this.dashedLineTo(point.x, point.y, segmentLength, segmentGap);
 	}
 
+	/**
+	 * Controls whether lines drawn with dashedLineTo are treated as solid with respect to fills **Only applies to dashed lines drawn while `dashedFill` is set to `true`.
+	 *
+	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines. Ensure your rendering environment supports transparency.
+	 *
+	*/
 	get dashedFill(): boolean {
 		return this._dashedFill;
 	}

@@ -34,6 +34,7 @@ function main(element: HTMLElement) {
 		.dashedLineToPoint(points[1], 20, 5)
 		.dashedLineToPoint(points[2], 20, 5)
 		.dashedLineToPoint(points[3], 20, 5)
+		.dashedLineToPoint(points[4], 20, 5)
 		.endFill();
 
 	extended.position.set(
