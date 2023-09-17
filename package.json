@@ -1,7 +1,7 @@
 {
 	"name": "@falchion-studios/pixi-extended-graphics",
 	"private": false,
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"type": "module",
 	"main": "dist/extendedGraphics.js",
 	"types": "dist/extendedGraphics.d.ts",
@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@pixi/math-extras": "^7.2.4",
+		"clamp": "^1.0.1",
 		"pixi.js": "^7.2.4",
 		"typedoc": "^0.25.1"
 	}

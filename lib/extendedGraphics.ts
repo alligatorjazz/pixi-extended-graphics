@@ -89,14 +89,18 @@ export class ExtendedGraphics extends Graphics {
 		const totalScalar = (segmentLength + segmentGap) / delta.magnitude();
 		const pieceCount = Math.floor(delta.magnitude() / (segmentLength + segmentGap));
 
-		for (let i = 0; i < pieceCount; i++) {
+		for (let i = 0; i <= pieceCount; i++) {
 			const start = i == 0 ? origin : delta
 				.multiplyScalar(Math.min(i * totalScalar))
 				// ensures segments are drawn relative to the specified origin rather than (0, 0)
 				.add(origin);
 			this.moveTo(start.x, start.y);
+			
 			const end = delta.multiplyScalar(segmentScalar + (i * totalScalar)).add(origin);
-			this.lineTo(end.x, end.y);
+			this.lineTo(
+				i == pieceCount ? delta.x + origin.x : end.x, 
+				i == pieceCount ? delta.y + origin.y : end.y, 
+			);
 		}
 
 		// the dashed line may have a gap at the end. 

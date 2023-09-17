@@ -16,7 +16,7 @@ function main(element: HTMLElement) {
 	extended.beginFill("black");
 	extended.drawRect(0, 0, width, height);
 	extended.endFill();
-	extended.lineStyle({ color: "skyblue", width: 10 })
+	extended.lineStyle({ color: "skyblue", width: 10, alignment: 0 })
 	extended.moveTo(0, 0);
 
 	const points = [
