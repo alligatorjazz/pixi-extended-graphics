@@ -52,6 +52,12 @@ export class ExtendedGraphics extends Graphics {
 		super(geometry);
 	}
 
+	/**
+	 * Same as `PIXI.Graphics.endFill()`, except when `this.dashedFill` is set to true. Otherwise,
+	 * it is neccessary to call `endFill()` in order to make fills drawn with dashed lines appear.
+	 *
+	 * @returns This ExtendedGraphics object. Good for chaining method calls
+	*/
 	endFill(): this {
 		// if dashedFill enabled, draw transparent lines underneath the dashed ones
 		if (this.dashedFill) {
@@ -169,8 +175,10 @@ export class ExtendedGraphics extends Graphics {
 	}
 
 	/**
-	 * Controls whether lines drawn with dashedLineTo are treated as solid with respect to fills **Only applies to dashed lines drawn while `dashedFill` is set to `true`.
-	 *
+	 * Controls whether lines drawn with dashedLineTo are treated as solid with respect to fills.
+	 * Only applies to dashed lines drawn while `dashedFill` is set to `true`. **Fills made with 
+	 * dashed lines do not take effect until `ExtendedGraphics.endFill()` is called.** 
+	 * 
 	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines. Ensure your rendering environment supports transparency.
 	 *
 	*/
