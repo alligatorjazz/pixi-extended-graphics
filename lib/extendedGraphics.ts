@@ -36,18 +36,60 @@ export class ExtendedGraphics extends Graphics {
 	 * @public @readonly
 	*/
 	readonly drawPosition: Point = new Point(0, 0);
-
+	/**
+	 * Controls whether lines drawn with dashedLineTo are treated as solid with respect to fills **Only applies to dashed lines drawn while `dashedFill` is set to `true`.
+	 *
+	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines.
+	 *
+	*/
+	private _dashedFill: boolean = false;
+	private solidQueue: Point[] = [];
+	private dashQueue: (() => void)[] = [];
+	private segmentStyle: { segmentLength: number; segmentGap: number; } = {
+		segmentLength: 10,
+		segmentGap: 2
+	};
 	/**
 	 * Creates a new `ExtendedGraphics()` instance.
 	 *
 	 * @constructor
 	 *
+	 * @param @see PIXI.Geometry
 	 * @returns type and meaning of return value
 	*/
 	constructor(geometry?: GraphicsGeometry) {
 		super(geometry);
 	}
 
+	endFill(): this {
+		// if dashedFill enabled, draw transparent lines underneath the dashed ones
+		if (this.dashedFill) {
+			const originalStyle = { ...this.line };
+			this.lineStyle({ ...originalStyle, alpha: 0 });
+			const queue = this.solidQueue.slice(-1)[0].equals(this.solidQueue[0]) ?
+				this.solidQueue :
+				this.solidQueue.concat(this.solidQueue[0]);
+			console.log(queue);
+
+			this.drawPolygon(queue);
+			this.lineStyle(originalStyle);
+
+			for (const drawLine of this.dashQueue) {
+				drawLine();
+				// compensates for the fact that the final point of the polygon was
+				// added *after* the dashed lines were drawn
+
+				this.drawDashesBetween(
+					this.solidQueue[this.solidQueue.length - 1],
+					this.solidQueue[0],
+					this.segmentStyle.segmentLength,
+					this.segmentStyle.segmentGap
+				);
+			}
+		}
+		super.endFill();
+		return this;
+	}
 	/**
 	 * Same as `PIXI.Graphics.moveTo()`, but stores the drawing position.
 	 *
@@ -68,6 +110,29 @@ export class ExtendedGraphics extends Graphics {
 		return super.lineTo(x, y);
 	}
 
+	private drawDashesBetween(p1: Point, p2: Point, segmentLength: number, segmentGap: number): void {
+		const delta = p2.subtract(p1);
+		// the factor the delta will be multipled by to produce the start and end of each segment
+		const segmentScalar = segmentLength / delta.magnitude();
+		// same as above, including space for the gap
+		const totalScalar = (segmentLength + segmentGap) / delta.magnitude();
+		const pieceCount = Math.floor(delta.magnitude() / (segmentLength + segmentGap));
+		for (let i = 0; i <= pieceCount; i++) {
+			const start = i == 0 ? p1 : delta
+				.multiplyScalar(i * totalScalar)
+				// ensures segments are drawn relative to the specified origin rather than (0, 0)
+				.add(p1);
+			this.moveTo(start.x, start.y);
+
+			const end = delta.multiplyScalar(segmentScalar + (i * totalScalar)).add(p1);
+			// the dashed line may have a gap at the end. these lines ensures the drawing location is set
+			// to the actual destination rather than whatever location the final segment happened to cut off at.
+			this.lineTo(
+				i == pieceCount ? delta.x + p1.x : end.x,
+				i == pieceCount ? delta.y + p1.y : end.y,
+			);
+		}
+	}
 	/**
 	 * Draws a dashed line in the current line style from the current drawing position to `(x, y)`.
 	 *
@@ -81,33 +146,19 @@ export class ExtendedGraphics extends Graphics {
 	dashedLineTo(x: number, y: number, segmentLength: number, segmentGap: number): this {
 		const origin = this.drawPosition.clone();
 		const destination = new Point(x, y);
-		const delta = destination.subtract(origin);
 
-		// the factor the delta will be multipled by to produce the start and end of each segment
-		const segmentScalar = segmentLength / delta.magnitude();
-		// same as above, including space for the gap
-		const totalScalar = (segmentLength + segmentGap) / delta.magnitude();
-		const pieceCount = Math.floor(delta.magnitude() / (segmentLength + segmentGap));
-
-		for (let i = 0; i <= pieceCount; i++) {
-			const start = i == 0 ? origin : delta
-				.multiplyScalar(Math.min(i * totalScalar))
-				// ensures segments are drawn relative to the specified origin rather than (0, 0)
-				.add(origin);
-			this.moveTo(start.x, start.y);
-			
-			const end = delta.multiplyScalar(segmentScalar + (i * totalScalar)).add(origin);
-			this.lineTo(
-				i == pieceCount ? delta.x + origin.x : end.x, 
-				i == pieceCount ? delta.y + origin.y : end.y, 
-			);
+		if (this.dashedFill) {
+			// saves the segment settings to segment style
+			this.segmentStyle = { segmentLength, segmentGap };
+			this.solidQueue.push(origin);
+			this.solidQueue.push(destination);
+			this.dashQueue.push(() => this.drawDashesBetween(origin, destination, segmentLength, segmentGap));
+		} else {
+			this.drawDashesBetween(origin, destination, segmentLength, segmentGap);
 		}
 
-		// the dashed line may have a gap at the end. 
-		// this line ensures the drawing location is set
-		// to the actual destination rather than whatever 
-		// location the final segment happened to cut off at.
 		this.moveTo(x, y);
+
 		return this;
 	}
 
@@ -118,7 +169,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	moveToPoint(point: Point): this {
-		return this.moveTo(point.x, point.y)
+		return this.moveTo(point.x, point.y);
 	}
 
 	/**
@@ -128,7 +179,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	lineToPoint(point: Point): this {
-		return this.lineTo(point.x, point.y)
+		return this.lineTo(point.x, point.y);
 	}
 
 	/**
@@ -138,6 +189,15 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	dashedLineToPoint(point: Point, segmentLength: number, segmentGap: number): this {
-		return this.dashedLineTo(point.x, point.y, segmentLength, segmentGap)
+		return this.dashedLineTo(point.x, point.y, segmentLength, segmentGap);
+	}
+
+	get dashedFill(): boolean {
+		return this._dashedFill;
+	}
+
+	setDashedFill(value: boolean): this {
+		this._dashedFill = value;
+		return this;
 	}
 }

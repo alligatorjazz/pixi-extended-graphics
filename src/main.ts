@@ -12,24 +12,29 @@ function main(element: HTMLElement) {
 	const height = 500;
 
 	const extended = new ExtendedGraphics();
-	
-	extended.beginFill("black");
-	extended.drawRect(0, 0, width, height);
-	extended.endFill();
-	extended.lineStyle({ color: "skyblue", width: 10, alignment: 0 })
-	extended.moveTo(0, 0);
+
+
+
+	extended;
+		
 
 	const points = [
 		new Point(width, 0),
 		new Point(width, height),
 		new Point(0, height),
+		new Point(width / 2, height / 2),
 		new Point(0, 0),
 	];
 
-	extended.dashedLineToPoint(points[0], 20, 5);
-	extended.dashedLineToPoint(points[1], 20, 5);
-	extended.dashedLineToPoint(points[2], 20, 5);
-	extended.dashedLineToPoint(points[3], 20, 5);
+	extended
+		.beginFill("black")
+		.setDashedFill(true)
+		.lineStyle({ color: "skyblue", width: 10, alignment: 0 })
+		.dashedLineToPoint(points[0], 20, 5)
+		.dashedLineToPoint(points[1], 20, 5)
+		.dashedLineToPoint(points[2], 20, 5)
+		.dashedLineToPoint(points[3], 20, 5)
+		.endFill();
 
 	extended.position.set(
 		app.view.width / 2,
@@ -39,7 +44,7 @@ function main(element: HTMLElement) {
 	extended.pivot.set(
 		width / 2,
 		height / 2
-	)
+	);
 
 	app.stage.addChild(extended);
 
