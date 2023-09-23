@@ -179,7 +179,9 @@ export class ExtendedGraphics extends Graphics {
 	 * Only applies to dashed lines drawn while `dashedFill` is set to `true`. **Fills made with 
 	 * dashed lines do not take effect until `ExtendedGraphics.endFill()` is called.** 
 	 * 
-	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines. Ensure your rendering environment supports transparency.
+	 * @remarks Internally, this is done by storing the instruction to draw each dashed line, 
+	 * and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks 
+	 * if drawing many dashed lines. Ensure your rendering environment supports transparency.
 	 *
 	*/
 	get dashedFill(): boolean {
