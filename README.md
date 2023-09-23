@@ -4,7 +4,7 @@
 
 ## Install
 ```bash
-npm install @falchion-studios/pixi-extended-graphics
+npm install pixi-extended-graphics
 ```
 ## Docs
 [Full Documentation](https://alligatorjazz.github.io/pixi-extended-graphics/classes/ExtendedGraphics.html)
