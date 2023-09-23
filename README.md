@@ -1,6 +1,6 @@
 # pixi-extended-graphics
 
-**A simple class that extends the base [pixi.js](https://pixijs.io/) with a few useful utility functions, including built-in support for dashed lines.**
+**A simple class that extends the base [pixi.js](https://pixijs.io/) with built-in support for dashed lines.**
 
 ## Install
 ```bash
