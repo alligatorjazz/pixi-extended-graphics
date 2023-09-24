@@ -1,35 +1,29 @@
 import "@pixi/math-extras";
 import { Graphics, GraphicsGeometry, Point } from "pixi.js";
 /**
-	 * Adds a variety of utility functions to the base pixi.js graphics class.
-	 * @remarks
-	 *
-	 * Enables support for dotted lines and more.
-	 *
-	 * @example
-	 * ```typescript
-		import { Point } from "pixi.js";
-		import { ExtendedGraphics } from "./extendedGraphics";
+ * Extends the pixi.js `Graphics` class with support for dotted lines.
+ * @example
+ * ```typescript
+import { Point } from "pixi.js";
+import { ExtendedGraphics } from "./extendedGraphics";
 
-		const graphics = new ExtendedGraphics();
-		graphics.lineStyle({ color: "white", width: 10, alignment: 0.5 });
+const graphics = new ExtendedGraphics();
+graphics.lineStyle({ color: "white", width: 10, alignment: 0.5 });
 
-		// draw line to point
-		const point1 = new Point(120, 0);
-		graphics.lineToPoint(point1);
+// draw line to point
+const point1 = new Point(120, 0);
+graphics.lineToPoint(point1);
 
-		// draw dashed line
-		const segmentLength = 20;
-		const segmentGap = 5;
-		graphics.dashedLineTo(240, 0, segmentLength, segmentGap);
+// draw dashed line
+const segmentLength = 20;
+const segmentGap = 5;
+graphics.dashedLineTo(240, 0, segmentLength, segmentGap);
 
-		// draw dashed line to point
-		const point2 = new Point(360, 0);
-		graphics.dashedLineToPoint(point2, segmentLength, segmentGap);
-	 * ```
-	 *
-	 * @public 
-	 */
+// draw dashed line to point
+const point2 = new Point(360, 0);
+graphics.dashedLineToPoint(point2, segmentLength, segmentGap);
+* ```
+*/
 export class ExtendedGraphics extends Graphics {
 	/**
 	 * Stores the current drawing position of the graphics element.
@@ -45,7 +39,7 @@ export class ExtendedGraphics extends Graphics {
 	 *
 	 * @constructor
 	 *
-	 * @param @see PIXI.Geometry
+	 * @param geometry - {@link https://pixijs.download/release/docs/PIXI.GraphicsGeometry.html | PIXI.GraphicsGeometry}
 	 * @returns type and meaning of return value
 	*/
 	constructor(geometry?: GraphicsGeometry) {

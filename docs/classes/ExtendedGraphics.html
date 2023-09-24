@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ExtendedGraphics | @falchion-studios/pixi-extended-graphics</title><meta name="description" content="Documentation for @falchion-studios/pixi-extended-graphics"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ExtendedGraphics | pixi-extended-graphics</title><meta name="description" content="Documentation for pixi-extended-graphics"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -6,21 +6,19 @@
 <div id="tsd-toolbar-links"></div></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">@falchion-studios/pixi-extended-graphics</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">pixi-extended-graphics</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-menu"></use></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-content">
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
-<li><a href="../modules.html">@falchion-studios/pixi-extended-graphics</a></li>
+<li><a href="../modules.html">pixi-extended-graphics</a></li>
 <li><a href="ExtendedGraphics.html">ExtendedGraphics</a></li></ul>
 <h1>Class ExtendedGraphics</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>Adds a variety of utility functions to the base pixi.js graphics class.</p>
+<div class="tsd-comment tsd-typography"><p>Extends the pixi.js <code>Graphics</code> class with support for dotted lines.</p>
 </div>
 <div class="tsd-comment tsd-typography">
-<h4>Remarks</h4><p>Enables support for dotted lines and more.</p>
-
 <h4>Example</h4><pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Point</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;pixi.js&quot;</span><span class="hl-1">;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">ExtendedGraphics</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&quot;./extendedGraphics&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">graphics</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">ExtendedGraphics</span><span class="hl-1">();</span><br/><span class="hl-4">graphics</span><span class="hl-1">.</span><span class="hl-0">lineStyle</span><span class="hl-1">({ </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&quot;white&quot;</span><span class="hl-1">, </span><span class="hl-4">width:</span><span class="hl-1"> </span><span class="hl-7">10</span><span class="hl-1">, </span><span class="hl-4">alignment:</span><span class="hl-1"> </span><span class="hl-7">0.5</span><span class="hl-1"> });</span><br/><br/><span class="hl-8">// draw line to point</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">point1</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Point</span><span class="hl-1">(</span><span class="hl-7">120</span><span class="hl-1">, </span><span class="hl-7">0</span><span class="hl-1">);</span><br/><span class="hl-4">graphics</span><span class="hl-1">.</span><span class="hl-0">lineToPoint</span><span class="hl-1">(</span><span class="hl-4">point1</span><span class="hl-1">);</span><br/><br/><span class="hl-8">// draw dashed line</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">segmentLength</span><span class="hl-1"> = </span><span class="hl-7">20</span><span class="hl-1">;</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">segmentGap</span><span class="hl-1"> = </span><span class="hl-7">5</span><span class="hl-1">;</span><br/><span class="hl-4">graphics</span><span class="hl-1">.</span><span class="hl-0">dashedLineTo</span><span class="hl-1">(</span><span class="hl-7">240</span><span class="hl-1">, </span><span class="hl-7">0</span><span class="hl-1">, </span><span class="hl-4">segmentLength</span><span class="hl-1">, </span><span class="hl-4">segmentGap</span><span class="hl-1">);</span><br/><br/><span class="hl-8">// draw dashed line to point</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">point2</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Point</span><span class="hl-1">(</span><span class="hl-7">360</span><span class="hl-1">, </span><span class="hl-7">0</span><span class="hl-1">);</span><br/><span class="hl-4">graphics</span><span class="hl-1">.</span><span class="hl-0">dashedLineToPoint</span><span class="hl-1">(</span><span class="hl-4">point2</span><span class="hl-1">, </span><span class="hl-4">segmentLength</span><span class="hl-1">, </span><span class="hl-4">segmentGap</span><span class="hl-1">);</span>
 </code><button>Copy</button></pre>
 </div></section>
@@ -31,7 +29,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">ExtendedGraphics</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L33">lib/extendedGraphics.ts:33</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L27">lib/extendedGraphics.ts:27</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -289,15 +287,16 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">geometry</span>: <span class="tsd-signature-type ">GraphicsGeometry</span></h5></li></ul></div>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">geometry</span>: <span class="tsd-signature-type ">GraphicsGeometry</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://pixijs.download/release/docs/PIXI.GraphicsGeometry.html">PIXI.GraphicsGeometry</a></p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ExtendedGraphics.html" class="tsd-signature-type tsd-kind-class">ExtendedGraphics</a></h4><p>type and meaning of return value</p>
 
-<div class="tsd-comment tsd-typography">
-<h4>See</h4><p>PIXI.Geometry</p>
-</div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Overrides Graphics.constructor</p>
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L51">lib/extendedGraphics.ts:51</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L45">lib/extendedGraphics.ts:45</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="_accessibleActive" class="tsd-anchor"></a>
@@ -367,7 +366,7 @@
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>_dashed<wbr/>Fill</span><a href="#_dashedFill" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">_dashed<wbr/>Fill</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L40">lib/extendedGraphics.ts:40</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L34">lib/extendedGraphics.ts:34</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited tsd-is-external"><a id="_destroyed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>_destroyed</span><a href="#_destroyed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">_destroyed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -669,7 +668,7 @@ The culling area is defined in local space.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L42">lib/extendedGraphics.ts:42</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L36">lib/extendedGraphics.ts:36</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="displayObjectUpdateTransform" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>display<wbr/>Object<wbr/>Update<wbr/>Transform</span><a href="#displayObjectUpdateTransform" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">display<wbr/>Object<wbr/>Update<wbr/>Transform</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
@@ -691,7 +690,7 @@ The culling area is defined in local space.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L38">lib/extendedGraphics.ts:38</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L32">lib/extendedGraphics.ts:32</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="eventMode" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>event<wbr/>Mode</span><a href="#eventMode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">event<wbr/>Mode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventMode</span></div>
@@ -1134,7 +1133,7 @@ Can be shared between multiple Graphics objects.</p>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>solid<wbr/>Queue</span><a href="#solidQueue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">solid<wbr/>Queue</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Point</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L41">lib/extendedGraphics.ts:41</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L35">lib/extendedGraphics.ts:35</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="sortDirty" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>sort<wbr/>Dirty</span><a href="#sortDirty" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">sort<wbr/>Dirty</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -1357,10 +1356,12 @@ dashed lines do not take effect until <code>ExtendedGraphics.endFill()</code> is
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 <div class="tsd-comment tsd-typography">
-<h4>Remarks</h4><p>Internally, this is done by storing the instruction to draw each dashed line, and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks if drawing many dashed lines. Ensure your rendering environment supports transparency.</p>
+<h4>Remarks</h4><p>Internally, this is done by storing the instruction to draw each dashed line, 
+and then drawing solid transparent lines underneath them all at once. May cause performance bottlenecks 
+if drawing many dashed lines. Ensure your rendering environment supports transparency.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L185">lib/extendedGraphics.ts:185</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L181">lib/extendedGraphics.ts:181</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="destroyed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>destroyed</span><a href="#destroyed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -2534,7 +2535,7 @@ Note that only the geometry of the object is cloned, not its transform (position
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L130">lib/extendedGraphics.ts:130</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L124">lib/extendedGraphics.ts:124</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="dashedLineToPoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>dashed<wbr/>Line<wbr/>To<wbr/>Point</span><a href="#dashedLineToPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -2558,7 +2559,7 @@ Note that only the geometry of the object is cloned, not its transform (position
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L173">lib/extendedGraphics.ts:173</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L167">lib/extendedGraphics.ts:167</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="destroy" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>destroy</span><a href="#destroy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -2669,7 +2670,7 @@ Note that only the geometry of the object is cloned, not its transform (position
 <h5><span class="tsd-kind-parameter">segmentGap</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L97">lib/extendedGraphics.ts:97</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L91">lib/extendedGraphics.ts:91</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="drawEllipse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>draw<wbr/>Ellipse</span><a href="#drawEllipse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -2891,7 +2892,7 @@ it is neccessary to call <code>endFill()</code> in order to make fills drawn wit
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Overrides Graphics.endFill</p>
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L61">lib/extendedGraphics.ts:61</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L55">lib/extendedGraphics.ts:55</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="endHole" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>end<wbr/>Hole</span><a href="#endHole" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -3215,7 +3216,7 @@ method or the drawCircle() method.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Overrides Graphics.lineTo</p>
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L92">lib/extendedGraphics.ts:92</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L86">lib/extendedGraphics.ts:86</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="lineToPoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>line<wbr/>To<wbr/>Point</span><a href="#lineToPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -3235,7 +3236,7 @@ method or the drawCircle() method.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L163">lib/extendedGraphics.ts:163</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L157">lib/extendedGraphics.ts:157</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="listenerCount" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>listener<wbr/>Count</span><a href="#listenerCount" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -3294,7 +3295,7 @@ method or the drawCircle() method.</p>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <p>Overrides Graphics.moveTo</p>
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L82">lib/extendedGraphics.ts:82</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L76">lib/extendedGraphics.ts:76</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="moveToPoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>move<wbr/>To<wbr/>Point</span><a href="#moveToPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -3314,7 +3315,7 @@ method or the drawCircle() method.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L153">lib/extendedGraphics.ts:153</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L147">lib/extendedGraphics.ts:147</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="off" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>off</span><a href="#off" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -3767,7 +3768,7 @@ masking and filtering is applied extensively throughout the scene graph.</p>
 <h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ExtendedGraphics.html" class="tsd-signature-type tsd-kind-class">ExtendedGraphics</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/2ce7250/lib/extendedGraphics.ts#L189">lib/extendedGraphics.ts:189</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/alligatorjazz/dotted-lines-example/blob/8511680/lib/extendedGraphics.ts#L185">lib/extendedGraphics.ts:185</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="setMatrix" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Matrix</span><a href="#setMatrix" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -4288,7 +4289,7 @@ masking and filtering is applied extensively throughout the scene graph.</p>
 <li><a href="#updateTransform" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>update<wbr/>Transform</span></a></li>
 <li><a href="#mixin" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>mixin</span></a></li></ul></div></details></div>
 <div class="site-menu">
-<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>@falchion-studios/pixi-extended-graphics</span></a>
+<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>pixi-extended-graphics</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
 <li><a href="ExtendedGraphics.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>ExtendedGraphics</a></li></ul></nav></div></div></div>
 <div class="tsd-generator">

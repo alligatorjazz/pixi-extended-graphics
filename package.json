@@ -1,7 +1,7 @@
 {
 	"name": "pixi-extended-graphics",
 	"private": false,
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"type": "module",
 	"main": "dist/extendedGraphics.js",
 	"types": "dist/extendedGraphics.d.ts",
@@ -25,5 +25,6 @@
 		"@pixi/math-extras": "^7.2.4",
 		"clamp": "^1.0.1",
 		"pixi.js": "^7.2.4"
-	}
+	},
+	"files": ["dist"]
 }
