@@ -1,5 +1,5 @@
 import "@pixi/math-extras";
-import { Graphics, GraphicsGeometry, Point } from "pixi.js";
+import { Graphics, GraphicsGeometry, IPointData, Point } from "pixi.js";
 /**
  * Extends the pixi.js `Graphics` class with support for dotted lines.
  * @example
@@ -144,7 +144,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @param point - The point you want to move the drawing position to.
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
-	moveToPoint(point: Point): this {
+	moveToPoint(point: IPointData): this {
 		return this.moveTo(point.x, point.y);
 	}
 
@@ -154,7 +154,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @param point - The point you want the line to terminate at.
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
-	lineToPoint(point: Point): this {
+	lineToPoint(point: IPointData): this {
 		return this.lineTo(point.x, point.y);
 	}
 
