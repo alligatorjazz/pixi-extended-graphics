@@ -165,7 +165,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @param point - The point you want the line to terminate at.
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
-	dashedLineToPoint(point: Point, segmentLength: number, segmentGap: number): this {
+	dashedLineToPoint(point: IPointData, segmentLength: number, segmentGap: number): this {
 		return this.dashedLineTo(point.x, point.y, segmentLength, segmentGap);
 	}
 
