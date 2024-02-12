@@ -1,9 +1,4 @@
-import "@pixi/math-extras";
-import { Graphics, GraphicsGeometry, IPointData, ObservablePoint, Point } from "pixi.js";
-function toPoint(p: IPointData) {
-	if (p instanceof Point || p instanceof ObservablePoint) { return p; }
-	return new Point(p.x, p.y);
-}
+import { Graphics, GraphicsGeometry, IPointData, Point } from "pixi.js";
 
 /**
  * Extends the pixi.js `Graphics` class with support for dotted lines.
@@ -92,25 +87,25 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	lineTo(x: number, y: number): this {
-		new Point(this.drawPosition.x, this.drawPosition.y).copyFrom(new Point(x, y));
+		this.drawPosition = new Point(x, y);
 		return super.lineTo(x, y);
 	}
 
 	private drawDashesBetween(p1: IPointData, p2: IPointData, segmentLength: number, segmentGap: number): void {
-		const delta = toPoint(p2).subtract(p1);
+		console.log(p1, p2);
+		const delta = new Point(p2.x - p1.x, p2.y - p1.y);
 		// the factor the delta will be multipled by to produce the start and end of each segment
-		const segmentScalar = segmentLength / delta.magnitude();
+		const segmentScalar = segmentLength / Math.sqrt(delta.x ** 2 + delta.y ** 2);
 		// same as above, including space for the gap
-		const totalScalar = (segmentLength + segmentGap) / delta.magnitude();
-		const pieceCount = Math.floor(delta.magnitude() / (segmentLength + segmentGap));
+		const totalScalar = (segmentLength + segmentGap) / Math.sqrt(delta.x ** 2 + delta.y ** 2);
+		const pieceCount = Math.floor(Math.sqrt(delta.x ** 2 + delta.y ** 2) / (segmentLength + segmentGap));
 		for (let i = 0; i <= pieceCount; i++) {
-			const start = i == 0 ? p1 : delta
-				.multiplyScalar(i * totalScalar)
+			const start = i == 0 ? p1 :
 				// ensures segments are drawn relative to the specified origin rather than (0, 0)
-				.add(p1);
+				new Point((delta.x * i * totalScalar) + p1.x, (delta.y * i * totalScalar) + p1.y);
 			this.moveTo(start.x, start.y);
 
-			const end = delta.multiplyScalar(segmentScalar + (i * totalScalar)).add(p1);
+			const end = new Point((delta.x * segmentScalar + (i * totalScalar)) + p1.x, (delta.y * segmentScalar + (i * totalScalar)) + p1.y);
 			// the dashed line may have a gap at the end. these lines ensures the drawing location is set
 			// to the actual destination rather than whatever location the final segment happened to cut off at.
 			this.lineTo(
