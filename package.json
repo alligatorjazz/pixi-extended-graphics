@@ -1,7 +1,7 @@
 {
 	"name": "pixi-extended-graphics",
 	"private": false,
-	"version": "0.2.3",
+	"version": "0.2.7",
 	"type": "module",
 	"main": "dist/extendedGraphics.js",
 	"types": "dist/extendedGraphics.d.ts",
