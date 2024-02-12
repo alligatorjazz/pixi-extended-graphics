@@ -1,5 +1,5 @@
+import "@pixi/math-extras";
 import { Graphics, GraphicsGeometry, IPointData, Point } from "pixi.js";
-
 /**
  * Extends the pixi.js `Graphics` class with support for dotted lines.
  * @example
@@ -24,18 +24,15 @@ const point2 = new Point(360, 0);
 graphics.dashedLineToPoint(point2, segmentLength, segmentGap);
 * ```
 */
-
 export class ExtendedGraphics extends Graphics {
 	/**
 	 * Stores the current drawing position of the graphics element.
-	 * @privat
+	 * @public @readonly
 	*/
-	private _drawPosition: IPointData = new Point(0, 0);
-	get drawPosition() { return this._drawPosition as Readonly<IPointData>; }
-	private set drawPosition(newPosition: IPointData) { this._drawPosition = newPosition; }
+	readonly drawPosition: Point = new Point(0, 0);
 
 	private _dashedFill: boolean = false;
-	private solidQueue: IPointData[] = [];
+	private solidQueue: Point[] = [];
 	private dashQueue: (() => void)[] = [];
 	/**
 	 * Creates a new `ExtendedGraphics()` instance.
@@ -77,7 +74,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	moveTo(x: number, y: number): this {
-		this.drawPosition = new Point(x, y);
+		this.drawPosition.copyFrom(new Point(x, y));
 		return super.moveTo(x, y);
 	}
 
@@ -87,13 +84,12 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	lineTo(x: number, y: number): this {
-		this.drawPosition = new Point(x, y);
+		this.drawPosition.copyFrom(new Point(x, y));
 		return super.lineTo(x, y);
 	}
 
-	private drawDashesBetween(p1: IPointData, p2: IPointData, segmentLength: number, segmentGap: number): void {
-		console.log(p1, p2);
-		const delta = new Point(p2.x - p1.x, p2.y - p1.y);
+	private drawDashesBetween(p1: Point, p2: Point, segmentLength: number, segmentGap: number): void {
+		const delta = p2.subtract(p1);
 		// the factor the delta will be multipled by to produce the start and end of each segment
 		const segmentScalar = segmentLength / Math.sqrt(delta.x ** 2 + delta.y ** 2);
 		// same as above, including space for the gap
@@ -125,7 +121,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
 	dashedLineTo(x: number, y: number, segmentLength: number, segmentGap: number): this {
-		const origin = { ...this.drawPosition };
+		const origin = this.drawPosition.clone();
 		const destination = new Point(x, y);
 
 		if (this.dashedFill) {
@@ -167,7 +163,7 @@ export class ExtendedGraphics extends Graphics {
 	 * @param point - The point you want the line to terminate at.
 	 * @returns This ExtendedGraphics object. Good for chaining method calls
 	*/
-	dashedLineToPoint(point: IPointData, segmentLength: number, segmentGap: number): this {
+	dashedLineToPoint(point: Point, segmentLength: number, segmentGap: number): this {
 		return this.dashedLineTo(point.x, point.y, segmentLength, segmentGap);
 	}
 
